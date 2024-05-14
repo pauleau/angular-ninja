@@ -1,0 +1,14 @@
+<div class="row d-flex align-items-center">
+  <div class="col-2">
+    <input class="form-control" type="number" [id]="inputId" [formControl]="birthYearCtrl" (blur)="onTouched()" />
+    @if (birthYearCtrl.dirty && birthYearCtrl.hasError('required')) {
+      <div id="birth-year-required-error">Birth year is required</div>
+    }
+    @if (birthYearCtrl.dirty && birthYearCtrl.hasError('invalidYear')) {
+      <div id="birth-year-invalid-error">This is not a valid year</div>
+    }
+  </div>
+  <div class="col formatted-year">
+    {{ year }}
+  </div>
+</div>

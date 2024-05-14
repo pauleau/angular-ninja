@@ -1,0 +1,11 @@
+<h2>{{ raceModel.name }}</h2>
+<p>{{ raceModel.startInstant | fromNow }}</p>
+
+<ul>
+  @for (pony of raceModel.ponies; track pony) {
+    <li>
+      <pr-pony [ponyModel]="pony"></pr-pony>
+      <!--    <a [routerLink]="['/races', raceModel.id, 'ponies', pony.id]">See pony</a>-->
+    </li>
+  }
+</ul>

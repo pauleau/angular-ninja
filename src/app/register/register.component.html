@@ -1,0 +1,51 @@
+<h1>Sign up</h1>
+
+@if (registrationFailed) {
+  <ngb-alert type="danger">Try again with another login.</ngb-alert>
+}
+
+<form (ngSubmit)="register()" [formGroup]="userForm">
+  <div class="mb-3" prFormLabelValidation>
+    <label prFormLabel class="form-label" for="login">Login</label>
+    <input id="login" class="form-control" type="text" formControlName="login" />
+
+    @if (loginCtrl.dirty && loginCtrl.hasError('required')) {
+      <div id="login-required-error">Login is required</div>
+    }
+    @if (loginCtrl.dirty && loginCtrl.hasError('minlength')) {
+      <div id="login-length-error">Your login should be at least 3 characters</div>
+    }
+  </div>
+
+  <div formGroupName="passwordForm">
+    <div class="mb-3" prFormLabelValidation>
+      <label prFormLabel class="form-label" for="password">Password</label>
+      <input id="password" class="form-control" type="password" formControlName="password" />
+      @if (passwordCtrl.dirty && passwordCtrl.hasError('required')) {
+        <div id="password-required-error">passwordCtrl is required</div>
+      }
+    </div>
+    <div class="mb-3" prFormLabelValidation>
+      <label prFormLabel class="form-label" for="confirm">Confirm password</label>
+      <input id="confirm" class="form-control" type="password" formControlName="confirmPassword" />
+      @if (confirmPasswordCtrl.dirty && confirmPasswordCtrl.hasError('required')) {
+        <div id="confirm-password-required-error">confirmPassword is required</div>
+      }
+    </div>
+    @if (passwordGroup.dirty && passwordGroup.hasError('matchingError')) {
+      <div id="password-matching-error">Your password does not match</div>
+    }
+  </div>
+
+  <div class="mb-3" prFormLabelValidation>
+    <label prFormLabel class="form-label" for="birthYear">Birth year</label>
+    <pr-birth-year-input inputId="birth-year" formControlName="birthYear"></pr-birth-year-input>
+    @if (birthYearCtrl.dirty && birthYearCtrl.hasError('required')) {
+      <div id="birth-year-required-error" class="invalid-feedback">Birth year is required</div>
+    } @else if (birthYearCtrl.dirty && birthYearCtrl.hasError('invalidYear')) {
+      <div id="birth-year-invalid-error" class="invalid-feedback">This is not a valid year</div>
+    }
+  </div>
+
+  <button class="btn btn-primary" type="submit" [disabled]="userForm.invalid">Let's Go!</button>
+</form>

@@ -1,0 +1,9 @@
+<ngb-pagination [collectionSize]="races.length" [(page)]="page" size="lg" />
+
+@for (race of races | slice: (page - 1) * 10 : page * 10; track race.id) {
+  <div>
+    <pr-race [raceModel]="race" />
+  </div>
+
+}
+

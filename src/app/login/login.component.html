@@ -1,0 +1,25 @@
+<h1>Log in</h1>
+
+<form (ngSubmit)="authenticate()" [formGroup]="credentials" prFormLabelValidation>
+  <div class="mb-3" prFormLabelValidation>
+    <label prFormLabel class="form-label" for="login"></label>
+    <input id="login" class="form-control" name="login" formControlName="login" />
+    @if (loginCtrl.dirty && loginCtrl.hasError('required')) {
+      <div>Login is required</div>
+    }
+  </div>
+  <div class="mb-3" prFormLabelValidation>
+    <label prFormLabel class="form-label" for="password"></label>
+    <input id="password" class="form-control" type="password" name="password" formControlName="password" />
+    @if (passwordCtrl.dirty && passwordCtrl.hasError('required')) {
+      <div>Login is required</div>
+    }
+  </div>
+
+  @if (authenticationFailed) {
+    <ngb-alert type="danger">Nope, try again.</ngb-alert>
+    <div class="alert alert-danger">Nope, try again.</div>
+  }
+
+  <button type="submit" [disabled]="credentials.invalid">Log me in!</button>
+</form>
